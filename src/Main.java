@@ -1,9 +1,26 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
+    public static ArrayList<Object> systemObjects = new ArrayList<Object>(); // Data structure with all the System Objects
+    public static ArrayList<Child> childs = new ArrayList<>();
+
+
     public static void main(String[] args)
     {
+
+
+        ArrayList<Child> childs = new ArrayList<>();
+        ExtremeDevices MambaRide = new ExtremeDevices("MambaRide", 12, 1.4);
+        Devices GiantWheel = new Devices("GiantWheel", 0, 0);
+        Devices Carrousel = new Devices("Carrousel", 8, 0);
+
+        systemObjects.add(MambaRide);
+        systemObjects.add(GiantWheel);
+        systemObjects.add(Carrousel);
+
         boolean rynSystem = true;
 
         while(rynSystem)
@@ -73,7 +90,34 @@ public class Main {
 
     private static void ExitPark()
     {
+        Scanner myObj = new Scanner(System.in);
+        System.out.println("What is the id of the Child who want to Exit?");
+        String in = myObj.nextLine();  // Read user input
 
+        int id = Integer.parseInt(in);
+
+        for(Child child : childs)
+        {
+            if(child.idIsEqual(id)) // check if the specific child is in the system
+            {
+                if(child.hasEticket())
+                {
+                    System.out.println("Please return your eTicket:\n1. ok\n2. I don't want to!");
+                    in = myObj.nextLine();  // Read user input
+                    if(in.equals("1"))
+                    {
+                        ETicket eTicket = child.getGuardian().returneTicket(child);
+                        double totalPay = eTicket.getTotalPay();
+                    }
+                }
+                System.out.println("The child doesn't have an eTicket..");
+                return;
+            }
+            System.out.println("The child was not found.. you inserted a wrong id number");
+            return;
+
+
+        }
 
     }
 

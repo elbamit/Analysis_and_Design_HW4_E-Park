@@ -1,21 +1,19 @@
 public class Devices
 {
     private Park park;
+    private String name;
     private int minAge;
     private double minHeight;
     private double maxWeight;
-    private boolean isOpen;
-    private boolean isInorder;
+    private boolean isOpen = true;
+    private boolean isInorder = true;
     private double price;
 
 
-    public Devices(Park park, int minAge, double minHeight, double maxWeight, boolean isOpen, boolean isInorder)
+    public Devices(String name, int minAge, double minHeight)
     {
-        this.park = park;
+        this.name = name;
         this.minAge = minAge;
         this.minHeight = minHeight;
-        this.maxWeight = maxWeight;
-        this.isOpen = isOpen;
-        this.isInorder = isInorder;
     }
 }

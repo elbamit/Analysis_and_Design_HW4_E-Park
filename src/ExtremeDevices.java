@@ -1,9 +1,9 @@
 public class ExtremeDevices extends Devices
 {
 
-    public ExtremeDevices(Park park, int minAge, double minHeight, double maxWeight, boolean isOpen, boolean isIsInorder)
+    public ExtremeDevices(String name, int minAge, double minHeight)
     {
-        super(park, minAge, minHeight, maxWeight, isOpen, isIsInorder);
+        super(name, minAge, minHeight);
     }
 }
 

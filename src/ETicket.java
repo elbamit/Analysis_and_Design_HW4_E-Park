@@ -9,7 +9,7 @@ public class ETicket
     private int age;
     private int height;
     private int weight;
-    private
+    private double totalPay;
 
 
     public ETicket(Child child, HashMap<Devices, Integer> devicesEntry, int id, int age, int height, int weight)
@@ -30,5 +30,10 @@ public class ETicket
     public void removeEntry(Devices devices)
     {
         return;
+    }
+
+    public double getTotalPay()
+    {
+        return this.totalPay;
     }
 }

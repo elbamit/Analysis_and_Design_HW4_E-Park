@@ -1,15 +1,33 @@
 public class Child {
 
-    private Guardian guardian;
-    private ETicket e_ticket;
     private int id;
+    private Guardian guardian;
+    private boolean owneETicket = false;
+    private boolean isRegisted;
 
 
 
-    public Child(Guardian guardian, ETicket e_ticket)
+    public Child(Guardian guardian)
     {
 
         this.guardian = guardian;
-        this.e_ticket = e_ticket;
+        this.isRegisted = false;
+    }
+
+    public boolean idIsEqual(int id)
+    {
+        if(this.id == id)
+            return true;
+        return false;
+    }
+
+    public boolean hasEticket()
+    {
+        return this.owneETicket;
+    }
+
+    public Guardian getGuardian()
+    {
+        return this.guardian;
     }
 }
