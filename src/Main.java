@@ -6,6 +6,7 @@ public class Main {
 
     public static ArrayList<Object> systemObjects = new ArrayList<Object>(); // Data structure with all the System Objects
     public static ArrayList<Child> childs = new ArrayList<>();
+    public static CreditCardCompany creditCardCompany = new CreditCardCompany();
 
 
     public static void main(String[] args)
@@ -20,6 +21,7 @@ public class Main {
         systemObjects.add(MambaRide);
         systemObjects.add(GiantWheel);
         systemObjects.add(Carrousel);
+        systemObjects.add(creditCardCompany);
 
         boolean rynSystem = true;
 
@@ -108,7 +110,12 @@ public class Main {
                     {
                         ETicket eTicket = child.getGuardian().returneTicket(child);
                         double totalPay = eTicket.getTotalPay();
+                        int creditCardNumber = eTicket.getCreditCardNumber();
+                        creditCardCompany.chargeCard(creditCardNumber, totalPay);
+                        System.out.println("Your card has been charged for: " + totalPay + ".  Thnk you and hope to see you in the future..");
                     }
+                    else
+                        return;
                 }
                 System.out.println("The child doesn't have an eTicket..");
                 return;

@@ -13,7 +13,7 @@ public class Guardian
 
 
 
-    public Guardian(int id_guard, ArrayList<Child> list_of_children, ParkSystem parkSystem, String creditCard)
+    public Guardian(int id_guard, ParkSystem parkSystem, String creditCard)
     {
         this.id_guard = id_guard;
         this.parkSystem = parkSystem;

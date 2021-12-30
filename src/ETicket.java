@@ -10,9 +10,10 @@ public class ETicket
     private int height;
     private int weight;
     private double totalPay;
+    private int creditCardNumber;
 
 
-    public ETicket(Child child, HashMap<Devices, Integer> devicesEntry, int id, int age, int height, int weight)
+    public ETicket(Child child, HashMap<Devices, Integer> devicesEntry, int id, int age, int height, int weight, int creditCardNumber)
     {
         this.child = child;
         this.devicesEntry = devicesEntry;
@@ -20,6 +21,8 @@ public class ETicket
         this.age = age;
         this.height = height;
         this.weight = weight;
+        this.creditCardNumber =  creditCardNumber;
+
     }
 
     public void addEntry(Devices devices, int numberOfEntry, boolean acceptance) // Acceptance for extreme Devices we need a permission from the Guardian
@@ -35,5 +38,10 @@ public class ETicket
     public double getTotalPay()
     {
         return this.totalPay;
+    }
+
+    public int getCreditCardNumber()
+    {
+        return creditCardNumber;
     }
 }
