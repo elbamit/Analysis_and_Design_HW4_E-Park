@@ -1,8 +1,9 @@
-public class ExtremeDevices
+public class ExtremeDevices extends Devices
 {
-    Park park;
 
-    public ExtremeDevices(Park park) {
-        this.park = park;
+    public ExtremeDevices(Park park, int minAge, double minHeight, double maxWeight, boolean isOpen, boolean isIsInorder)
+    {
+        super(park, minAge, minHeight, maxWeight, isOpen, isIsInorder);
     }
 }
+

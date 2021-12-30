@@ -22,34 +22,59 @@ public class Main {
 
             switch (in)  // SwitchCase on the user input
             {
-                case "1": // Register child
+                case "1" -> // Register child
+                        RegisterChild();
 
-                    break;
+                case "2" -> // Manage ticket
+                        ManageTicket();
 
-                case "2": // Manage ticket
+                case "3" -> // Add ride
+                        AddRide();
 
-                    break;
+                case "4" -> // Remove ride
+                        RemoveRide();
 
-                case "3": // Add ride
+                case "5" -> // Exit park
+                        ExitPark();
 
-                    break;
+                case "6" -> // Exit
 
-                case "4": // Remove ride
-
-                    break;
-
-                case "5": // Exit park
-
-                    break;
-
-                case "6": // Exit
-
-                    rynSystem = false;
-                    break;
-
-
+                        rynSystem = false;
             }
         }
-        System.out.println("gg and thank you");
+        System.out.println("gg and ByeBye");
     }
+
+
+
+    private static void RegisterChild()
+    {
+
+
+    }
+
+    private static void ManageTicket()
+    {
+
+
+    }
+
+    private static void AddRide()
+    {
+
+
+    }
+
+    private static void RemoveRide()
+    {
+
+
+    }
+
+    private static void ExitPark()
+    {
+
+
+    }
+
 }
