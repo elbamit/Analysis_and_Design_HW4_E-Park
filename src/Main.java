@@ -86,7 +86,7 @@ public class Main {
                         String separator = in.substring(2,3);
                         int year = Integer.parseInt(in.substring(3,7));
 
-                        if(month > 12 || month < 1 || year < 2022 || !separator.equals("/"))
+                        if(month > 12 || month < 1 || year > 2022 || year < 1 || !separator.equals("/"))
                         {
                             System.out.println("Wrong input! you should insert a valid date input");
                             continue;
