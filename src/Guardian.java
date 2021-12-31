@@ -3,15 +3,29 @@ import java.util.HashMap;
 
 public class Guardian
 {
-    private int id_guard;
     private String creditCard;
+    private String expiration_date;
     private HashMap<Child, ETicket> list_of_children;
 
 
 
     public Guardian() {
-        this.id_guard = 1;
-        this.creditCard = "12345";
+    }
+
+    public void setCreditCard(String creditCard) {
+        this.creditCard = creditCard;
+    }
+
+    public void setExpiration_date(String expiration_date) {
+        this.expiration_date = expiration_date;
+    }
+
+    public String getCreditCard() {
+        return creditCard;
+    }
+
+    public String getExpiration_date() {
+        return expiration_date;
     }
 
     public ETicket returneTicket(Child child)
@@ -19,5 +33,10 @@ public class Guardian
         ETicket temp = list_of_children.get(child);
         this.list_of_children.remove(child);
         return temp;
+    }
+
+    public void add_child(Child child, ETicket eTicket)
+    {
+        this.list_of_children.put(child, eTicket);
     }
 }

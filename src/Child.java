@@ -1,17 +1,34 @@
 public class Child {
 
     private int id;
+    private String name;
+    private int age;
     private Guardian guardian;
+    private int max_amount;
+    private ETicket eTicket;
     private boolean owneETicket = false;
     private boolean isRegisted;
 
 
 
-    public Child(Guardian guardian)
+    public Child(Guardian guardian, String name, int age)
     {
-
+        this.name = name;
+        this.age = age;
         this.guardian = guardian;
         this.isRegisted = false;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean idIsEqual(int id)
@@ -29,5 +46,22 @@ public class Child {
     public Guardian getGuardian()
     {
         return this.guardian;
+    }
+
+    public int getMax_amount() {
+        return max_amount;
+    }
+
+    public void setMax_amount(int max_amount) {
+        this.max_amount = max_amount;
+    }
+
+    public ETicket geteTicket() {
+        return eTicket;
+    }
+
+    public void seteTicket(ETicket eTicket) {
+        this.eTicket = eTicket;
+
     }
 }

@@ -7,7 +7,7 @@ public class Park
 
     public Park()
     {
-
+        devices = new ArrayList<Devices>();
     }
 
     //Function that adds a device to the park's list of device

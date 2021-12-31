@@ -14,4 +14,9 @@ public class CreditCardCompany
     {
 
     }
+
+    public String get_approval(String credit_card, String expiration)
+    {
+        return "Credit card approved";
+    }
 }

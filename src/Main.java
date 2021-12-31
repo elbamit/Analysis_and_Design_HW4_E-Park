@@ -1,11 +1,116 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
     public static ArrayList<Object> systemObjects = new ArrayList<Object>(); // Data structure with all the System Objects
-    public static ArrayList<Child> children = new ArrayList<>();
+    public static HashMap<Child, Integer> children_and_amount_to_pay = new HashMap<>();
     public static CreditCardCompany creditCardCompany = new CreditCardCompany();
+
+    private static int child_id = 0;
+    private static Guardian guardian = new Guardian();
+
+
+    public static String getInputString()
+    {
+
+        while(true)
+        {
+            Scanner myObj = new Scanner(System.in);
+            String in = myObj.nextLine();  // Read user input
+            if(in != null)
+            {
+                if (in.length() != 0)
+                {
+                    return in;
+                }
+                System.out.println("Wrong input! you should insert a String input");
+                continue;
+            }
+            System.out.println("Wrong input! you should insert a String input");
+            continue;
+        }
+
+    }
+
+
+    public static int getInputInt()
+    {
+        while(true)
+        {
+            Scanner myObj = new Scanner(System.in);
+            String in = myObj.nextLine();  // Read user input
+            if(in != null)
+            {
+                if (in.length() != 0)
+                {
+                    try {
+                        return Integer.parseInt(in);
+                    }
+                    catch(NumberFormatException e)
+                    {
+                        System.out.println("Wrong input! you should insert an int input");
+                        continue;
+                    }
+                }
+                System.out.println("Wrong input! you should insert an int input");
+                continue;
+            }
+            System.out.println("Wrong input! you should insert an int input");
+        }
+
+    }
+
+
+    public static String getInputDate()
+    {
+        while(true)
+        {
+            Scanner myObj = new Scanner(System.in);
+            String in = myObj.nextLine();  // Read user input
+            if(in != null)
+            {
+                if (in.length() != 5)
+                {
+                    try {
+                        int intInput = Integer.parseInt(in);
+                        String month = "";
+                        String year = "";
+                        for(int i = 0; i < in.length(); i++)
+                        {
+                            if(i < 2)
+                            {
+                                month += in.charAt(i);
+                            }
+                            else
+                            {
+                                year += in.charAt(i);
+                            }
+                        }
+                        if((Integer.parseInt(month) > 12) || ((Integer.parseInt(year) > 2022)))
+                        {
+                            System.out.println("Wrong input! you should insert an date input");
+                            continue;
+                        }
+
+                        return in;
+                    }
+                    catch(NumberFormatException e)
+                    {
+                        System.out.println("Wrong input! you should insert an date input");
+                        continue;
+                    }
+                }
+                System.out.println("Wrong input! you should insert an date input");
+                continue;
+            }
+            System.out.println("Wrong input! you should insert an date input");
+            continue;
+        }
+    }
+
 
 
     public static void main(String[] args)
@@ -19,7 +124,7 @@ public class Main {
         park.add_device(GiantWheel, 7);
         park.add_device(Carrousel, 5);
 
-        Guardian guardian = new Guardian();
+
 
         systemObjects.add(park);
         systemObjects.add(guardian);
@@ -74,23 +179,64 @@ public class Main {
     private static void RegisterChild()
     {
         int child_age;
+        String child_name;
         int child_height;
         int child_weight;
+        String credit_card_num;
+        String expiration_date;
+        int max_amount;
 
-        Scanner myObj = new Scanner(System.in);
+
+        System.out.println("Please enter the child's name?");
+        child_name = getInputString();
+
         System.out.println("Please enter the child's age?");
-        String in = myObj.nextLine();  // Read user input
-        child_age = Integer.parseInt(in);
+        child_age = getInputInt();
+
+        Child new_child = new Child(guardian, child_name, child_age);
+
+
+        System.out.println("Please enter credit card number?");
+        credit_card_num = getInputString();
+        guardian.setCreditCard(credit_card_num);
+
+        System.out.println("Please enter card expiration date? (MM/YYYY)");
+        expiration_date = getInputDate();
+        guardian.setExpiration_date(expiration_date);
+
+
+        System.out.println("Waiting for credit card company approval...");
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String approval = creditCardCompany.get_approval(guardian.getCreditCard(), guardian.getExpiration_date());
+        System.out.println(approval);
+
+        System.out.println("Please enter a maximum amount to charge?");
+        max_amount = getInputInt();
+        new_child.setMax_amount(max_amount);
+
+        new_child.setId(child_id);
+        children_and_amount_to_pay.put(new_child, 0);
+        child_id++;
+
+        ETicket eTicket = new ETicket(new_child, new_child.getId(), new_child.getAge());
+
+        new_child.seteTicket(eTicket);
+        guardian.add_child(new_child, eTicket);
+
 
         System.out.println("Please enter the child's height?");
-        in = myObj.nextLine();  // Read user input
-        child_height = Integer.parseInt(in);
+        child_height = getInputInt();
 
         System.out.println("Please enter the child's weight?");
-        in = myObj.nextLine();  // Read user input
-        child_weight = Integer.parseInt(in);
+        child_weight = getInputInt();
 
-//        Child new_child = new Child()
+        eTicket.setHeight(child_height);
+        eTicket.setWeight(child_weight);
+
 
         /* - asks for child's details
         - asks for credit card details + hagbalat shum le hiuv
@@ -152,7 +298,7 @@ public class Main {
 
         int id = Integer.parseInt(in);
 
-        for(Child child : children)
+        for(Child child : children_and_amount_to_pay.keySet())
         {
             if(child.idIsEqual(id)) // check if the specific child is in the system
             {

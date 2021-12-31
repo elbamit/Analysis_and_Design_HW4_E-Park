@@ -13,16 +13,11 @@ public class ETicket
     private int creditCardNumber;
 
 
-    public ETicket(Child child, HashMap<Devices, Integer> devicesEntry, int id, int age, int height, int weight, int creditCardNumber)
+    public ETicket(Child child, int id, int age)
     {
         this.child = child;
-        this.devicesEntry = devicesEntry;
         this.id = id;
         this.age = age;
-        this.height = height;
-        this.weight = weight;
-        this.creditCardNumber =  creditCardNumber;
-
     }
 
     public void addEntry(Devices devices, int numberOfEntry, boolean acceptance) // Acceptance for extreme Devices we need a permission from the Guardian
@@ -43,5 +38,21 @@ public class ETicket
     public int getCreditCardNumber()
     {
         return creditCardNumber;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 }
