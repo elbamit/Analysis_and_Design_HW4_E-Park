@@ -16,4 +16,8 @@ public class Devices
         this.minAge = minAge;
         this.minHeight = minHeight;
     }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 }

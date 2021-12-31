@@ -4,22 +4,14 @@ import java.util.HashMap;
 public class Guardian
 {
     private int id_guard;
-    private ParkSystem parkSystem;
     private String creditCard;
     private HashMap<Child, ETicket> list_of_children;
 
 
 
-
-
-
-    public Guardian(int id_guard, ParkSystem parkSystem, String creditCard)
-    {
-        this.id_guard = id_guard;
-        this.parkSystem = parkSystem;
-        this.creditCard = creditCard;
-        this.list_of_children = new HashMap<>();
-
+    public Guardian() {
+        this.id_guard = 1;
+        this.creditCard = "12345";
     }
 
     public ETicket returneTicket(Child child)
