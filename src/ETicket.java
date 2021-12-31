@@ -91,4 +91,9 @@ public class ETicket
         }
     }
 
+    public boolean haveEntries()
+    {
+        return (this.devicesEntry.isEmpty());
+    }
+
 }

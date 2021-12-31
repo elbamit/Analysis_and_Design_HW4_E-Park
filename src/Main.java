@@ -406,13 +406,39 @@ public class Main {
 
     private static void RemoveRide(boolean enteredFromManageTicket, Child child)
     {
-    /*
+
+        if (!enteredFromManageTicket) {
+            System.out.println("Please enter the child's id?");
+            int child_Id = getInputInt();
+            child = guardian.getChild(child_Id);
+            if (child == null) {
+                System.out.println("There is no child with id: " + child_Id + " in the System");
+                return;
+            }
+        }
+
+        ETicket childETicket = child.getETicket();
+        if(childETicket.haveEntries())
+        {
+            System.out.println("The child doesn't have any entries");
+            return;
+        }
+        else 
+        {
+
+        }
+
+
+
+
+        /*
         - asks for child id
         - shows all entries of the child
         - user chooses the device and ammount of entries to remove - updates the eticket
         - update the payment account
 
          */
+
 
     }
 
