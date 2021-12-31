@@ -9,7 +9,9 @@ public class Guardian
 
 
 
-    public Guardian() {
+    public Guardian()
+    {
+        list_of_children = new HashMap<>();
     }
 
     public void setCreditCard(String creditCard) {
@@ -42,6 +44,8 @@ public class Guardian
 
     public Child getChild(int id)
     {
+        if(list_of_children.isEmpty())
+            return null;
         for(Child child : this.list_of_children.keySet())
         {
             if(child.idIsEqual(id))

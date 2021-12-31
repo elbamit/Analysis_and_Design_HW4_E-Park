@@ -320,7 +320,8 @@ public class Main {
     private static void AddRide(boolean enteredFromManageTicket, Child child)
     {
 
-        if (!enteredFromManageTicket) {
+        if (!enteredFromManageTicket)
+        {
             System.out.println("Please enter the child's id?");
             int child_Id = getInputInt();
             child = guardian.getChild(child_Id);
@@ -423,7 +424,7 @@ public class Main {
             System.out.println("The child doesn't have any entries");
             return;
         }
-        else 
+        else
         {
 
         }
