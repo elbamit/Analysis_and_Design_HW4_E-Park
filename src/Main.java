@@ -8,6 +8,7 @@ public class Main {
     public static ArrayList<Object> systemObjects = new ArrayList<Object>(); // Data structure with all the System Objects
     public static HashMap<Child, Integer> children_and_amount_to_pay = new HashMap<>();
     public static CreditCardCompany creditCardCompany = new CreditCardCompany();
+    public static Park park;
 
     private static int child_id = 0;
     private static int child_password = 111;
@@ -116,7 +117,7 @@ public class Main {
 
     public static void main(String[] args)
     {
-        Park park = new Park();
+        park = new Park();
 
         ExtremeDevices MambaRide = new ExtremeDevices("MambaRide", 12, 1.4);
         Devices GiantWheel = new Devices("GiantWheel", 0, 0);
@@ -159,10 +160,10 @@ public class Main {
                         ManageTicket();
 
                 case "3" -> // Add ride
-                        AddRide();
+                        AddRide(false, null);
 
                 case "4" -> // Remove ride
-                        RemoveRide();
+                        RemoveRide(false, null);
 
                 case "5" -> // Exit park
                         ExitPark();
@@ -272,6 +273,7 @@ public class Main {
             e.printStackTrace();
         }
         currChild.showAllInfo();
+        System.out.println("------------------------------");
 
 
         boolean menuFlag = true;
@@ -287,10 +289,10 @@ public class Main {
             switch (choice)
             {
                 case 1:
-                    AddRide();
+                    AddRide(true, currChild);
                     break;
                 case 2:
-                    RemoveRide();
+                    RemoveRide(true, currChild);
                     break;
                 case 3:
                     menuFlag = false;
@@ -305,21 +307,91 @@ public class Main {
 
         }
 
-
         /*
         - asks for child id + password of child
         - shows all the entries the child has + current payment ammount
         - opens a sub-menu to choose between: add rides/ remove rides/ no action
         -
-
-
          */
 
 
     }
 
-    private static void AddRide()
+    private static void AddRide(boolean enteredFromManageTicket, Child child)
     {
+
+        if (!enteredFromManageTicket) {
+            System.out.println("Please enter the child's id?");
+            int child_Id = getInputInt();
+            child = guardian.getChild(child_Id);
+            if (child == null) {
+                System.out.println("There is no child with id: " + child_Id + " in the System");
+                return;
+            }
+        }
+
+        ETicket childETicket = child.getETicket();
+        ArrayList<Devices> allowedDevices = park.getAllowedDevices(child.getAge(), childETicket.getHeight());
+        if (allowedDevices.size() == 0) {
+            System.out.println("The child is not allowed to enter any Device right now..");
+            return;
+        }
+
+        boolean menuFlag = true;
+        int numOfDevices = allowedDevices.size();
+        while (menuFlag)
+        {
+
+            System.out.println("Please pick the Device you would like to buy entries for:");
+            for (int i = 0; i < numOfDevices; i++) {
+                int indexToShow = i + 1;
+                System.out.println(indexToShow + ". " + allowedDevices.get(i));
+            }
+            System.out.println(allowedDevices.size() + ". back to main menu");
+
+            int choice = getInputInt();
+            if (choice > allowedDevices.size() || choice < 1)
+            {
+                System.out.println("You inserted a wrong number");
+                continue;
+            }
+            else
+                {
+                Devices deviceToAdd = allowedDevices.get(choice - 1);
+                System.out.println("Please insert the number of entries you would like to add:");
+                int entries = getInputInt();
+
+                // check the maxSpend amount of the ETicket
+                double addedMoney = deviceToAdd.getPrice() * choice;
+                if (child.getETicket().getTotalPay() + addedMoney > child.getMax_amount()) {
+                    System.out.println("We are sorry, but you can't add the number of entries for the specific device.. (exceed from credit limit");
+                    return;
+                }
+                else
+                    {
+                    if (deviceToAdd instanceof ExtremeDevices)
+                    {
+                        menuFlag = true;
+                        while (menuFlag)
+                        {
+                            System.out.println("We need your approval for the Device - " + deviceToAdd + ", this is an Extreme Device");
+                            System.out.println("1. approve");
+                            System.out.println("2. don't approve");
+                            choice = getInputInt();
+                            if(choice == 2)
+                            {
+                                return;
+                            }
+                            menuFlag = false;
+                        }
+                        child.getETicket().addPayment(addedMoney);
+                        child.getETicket().updateDevicesEntries(deviceToAdd, entries);
+                    }
+
+                }
+
+            }
+
         /*
         - asks for child id
         - shows all the allowed devices for the child
@@ -329,10 +401,10 @@ public class Main {
 
          */
 
-
+        }
     }
 
-    private static void RemoveRide()
+    private static void RemoveRide(boolean enteredFromManageTicket, Child child)
     {
     /*
         - asks for child id

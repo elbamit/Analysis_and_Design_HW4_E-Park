@@ -73,4 +73,22 @@ public class ETicket
         }
         System.out.println("Total pay: " + this.totalPay);
     }
+
+    public void addPayment(double payment)
+    {
+        this.totalPay += payment;
+    }
+
+    public void updateDevicesEntries(Devices device, int entries)
+    {
+        if(this.devicesEntry.containsKey(device))
+        {
+            this.devicesEntry.put(device, this.devicesEntry.get(device) + entries);
+        }
+        else
+        {
+            this.devicesEntry.put(device, entries);
+        }
+    }
+
 }

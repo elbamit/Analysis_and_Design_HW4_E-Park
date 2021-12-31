@@ -20,4 +20,16 @@ public class Devices
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public boolean isAllowed(int age, double height)
+    {
+        if(age >= this.minAge && height >= this.minHeight && isOpen && isInorder)
+            return true;
+        return false;
+    }
+
+    public double getPrice()
+    {
+        return price;
+    }
 }

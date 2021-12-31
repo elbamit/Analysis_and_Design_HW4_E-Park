@@ -25,4 +25,16 @@ public class Park
             return true;
         }
     }
+
+    public ArrayList<Devices> getAllowedDevices(int age, double height)
+    {
+        ArrayList<Devices> devices = new ArrayList<>();
+        for (Devices device : this.devices)
+        {
+            if(device.isAllowed(age, height))
+                devices.add(device);
+        }
+        return devices;
+    }
+
 }

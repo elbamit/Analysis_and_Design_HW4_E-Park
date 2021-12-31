@@ -80,4 +80,9 @@ public class Child
     {
         this.eTicket.showAllInfo();
     }
+
+    public ETicket getETicket()
+    {
+        return this.eTicket;
+    }
 }
