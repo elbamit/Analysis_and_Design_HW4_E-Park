@@ -4,7 +4,7 @@ import java.util.HashMap;
 public class ETicket
 {
     Child child;
-    HashMap<Devices, Integer> devicesEntry;
+    HashMap<Devices, Integer> devicesEntry = new HashMap<>();
     private int id;
     private int age;
     private int height;
