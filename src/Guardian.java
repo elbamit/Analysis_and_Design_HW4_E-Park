@@ -39,4 +39,14 @@ public class Guardian
     {
         this.list_of_children.put(child, eTicket);
     }
+
+    public Child getChild(int id)
+    {
+        for(Child child : this.list_of_children.keySet())
+        {
+            if(child.idIsEqual(id))
+                return child;
+        }
+        return null;
+    }
 }
