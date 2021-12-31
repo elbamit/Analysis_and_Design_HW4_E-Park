@@ -32,4 +32,9 @@ public class Devices
     {
         return price;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

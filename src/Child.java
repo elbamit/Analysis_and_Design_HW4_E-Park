@@ -57,12 +57,10 @@ public class Child
         this.max_amount = max_amount;
     }
 
-    public ETicket geteTicket() {
-        return eTicket;
-    }
 
     public void seteTicket(ETicket eTicket) {
         this.eTicket = eTicket;
+        this.owneETicket = true;
 
     }
 

@@ -22,15 +22,6 @@ public class ETicket
         this.childPassword = childPassword;
     }
 
-    public void addEntry(Devices devices, int numberOfEntry, boolean acceptance) // Acceptance for extreme Devices we need a permission from the Guardian
-    {
-        return;
-    }
-
-    public void removeEntry(Devices devices)
-    {
-        return;
-    }
 
     public double getTotalPay()
     {
@@ -48,10 +39,6 @@ public class ETicket
 
     public void setHeight(int height) {
         this.height = height;
-    }
-
-    public int getWeight() {
-        return weight;
     }
 
     public void setWeight(int weight) {
@@ -91,9 +78,13 @@ public class ETicket
         }
     }
 
+    //Returns true if the device has entries - false otherwise
     public boolean haveEntries()
     {
-        return (this.devicesEntry.isEmpty());
+        return !(this.devicesEntry.isEmpty());
     }
 
+    public HashMap<Devices, Integer> getDevicesEntry() {
+        return devicesEntry;
+    }
 }

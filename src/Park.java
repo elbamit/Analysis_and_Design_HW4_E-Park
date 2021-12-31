@@ -26,6 +26,7 @@ public class Park
         }
     }
 
+    //Function that returns a list of the allowed devices for given age and height
     public ArrayList<Devices> getAllowedDevices(int age, double height)
     {
         ArrayList<Devices> devices = new ArrayList<>();

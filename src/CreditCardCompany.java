@@ -6,7 +6,6 @@ public class CreditCardCompany
 
     public CreditCardCompany()
     {
-
     }
 
 
