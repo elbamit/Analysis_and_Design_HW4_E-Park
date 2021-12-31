@@ -1,4 +1,5 @@
-public class Child {
+public class Child
+{
 
     private int id;
     private String name;
@@ -63,5 +64,20 @@ public class Child {
     public void seteTicket(ETicket eTicket) {
         this.eTicket = eTicket;
 
+    }
+
+    public void setRegisted(boolean val)
+    {
+        this.isRegisted = val;
+    }
+
+    public void setOwnETicket(boolean val)
+    {
+        this.owneETicket = val;
+    }
+
+    public void showAllInfo()
+    {
+        this.eTicket.showAllInfo();
     }
 }

@@ -10,6 +10,7 @@ public class Main {
     public static CreditCardCompany creditCardCompany = new CreditCardCompany();
 
     private static int child_id = 0;
+    private static int child_password = 111;
     private static Guardian guardian = new Guardian();
 
 
@@ -125,13 +126,13 @@ public class Main {
         park.add_device(Carrousel, 5);
 
 
-
         systemObjects.add(park);
         systemObjects.add(guardian);
         systemObjects.add(MambaRide);
         systemObjects.add(GiantWheel);
         systemObjects.add(Carrousel);
         systemObjects.add(creditCardCompany);
+
 
         boolean runSystem = true;
 
@@ -221,8 +222,9 @@ public class Main {
         new_child.setId(child_id);
         children_and_amount_to_pay.put(new_child, 0);
         child_id++;
+        child_password++;
 
-        ETicket eTicket = new ETicket(new_child, new_child.getId(), new_child.getAge());
+        ETicket eTicket = new ETicket(new_child, new_child.getId(), new_child.getAge(), child_password);
 
         new_child.seteTicket(eTicket);
         guardian.add_child(new_child, eTicket);
@@ -252,6 +254,58 @@ public class Main {
 
     private static void ManageTicket()
     {
+        System.out.println("Please enter the child's id?");
+        int child_Id = getInputInt();
+        Child currChild = guardian.getChild(child_Id);
+        if (currChild == null)
+        {
+            System.out.println("There is no child with id: " + child_Id + " in the System");
+            return;
+        }
+
+        System.out.println("Verifying the child password from your eTicket.. may take couple of seconds..");
+        try
+        {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+        currChild.showAllInfo();
+
+
+        boolean menuFlag = true;
+
+        while(menuFlag)
+        {
+            System.out.println("Please choose an option:");
+            System.out.println("1. add rides");
+            System.out.println("2. remove ride");
+            System.out.println("3. back to main menu");
+
+            int choice = getInputInt();
+            switch (choice)
+            {
+                case 1:
+                    AddRide();
+                    break;
+                case 2:
+                    RemoveRide();
+                    break;
+                case 3:
+                    menuFlag = false;
+                    break;
+
+                default:
+                {
+                    System.out.println("You inserted a wrong number");
+                    continue;
+                }
+            }
+
+        }
+
+
         /*
         - asks for child id + password of child
         - shows all the entries the child has + current payment ammount
@@ -309,10 +363,12 @@ public class Main {
                     if(in.equals("1"))
                     {
                         ETicket eTicket = child.getGuardian().returneTicket(child);
+                        child.setRegisted(false);
+                        child.setOwnETicket(false);
                         double totalPay = eTicket.getTotalPay();
                         int creditCardNumber = eTicket.getCreditCardNumber();
                         creditCardCompany.chargeCard(creditCardNumber, totalPay);
-                        System.out.println("Your card has been charged for: " + totalPay + ".  Thnk you and hope to see you in the future..");
+                        System.out.println("Your card has been charged for: " + totalPay + ".  Thank you and hope to see you in the future..");
                     }
                     else
                         return;
@@ -327,5 +383,4 @@ public class Main {
         }
 
     }
-
 }
